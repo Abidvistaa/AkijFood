@@ -12,11 +12,11 @@ namespace AkijFood.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class tblColdDrinkGivenTaskController : ControllerBase
+    public class API1AndAPI3AndAPI4Controller : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public tblColdDrinkGivenTaskController(ApplicationDbContext context)
+        public API1AndAPI3AndAPI4Controller(ApplicationDbContext context)
         {
             _context = context;
         }
