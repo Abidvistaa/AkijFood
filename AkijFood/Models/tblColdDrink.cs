@@ -16,10 +16,10 @@ namespace AkijFood.Models
         public string ColdDrinksName { get; set; }
         [Required]
         [Column(TypeName = "decimal(4)")]
-        public int NumQuantity { get; set; }
+        public int Quantity { get; set; }
         [Required]
         [Column(TypeName = "decimal(3)")]
-        public int NumUnitPrice { get; set; }
+        public int UnitPrice { get; set; }
       
     }
 }

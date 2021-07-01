@@ -30,8 +30,8 @@ namespace AkijFood.Controllers
         {
             tblColdDrink coldDrink = new tblColdDrink();
             coldDrink.ColdDrinksName = "Mojo";
-            coldDrink.NumQuantity = 575;
-            coldDrink.NumUnitPrice = 15;
+            coldDrink.Quantity = 575;
+            coldDrink.UnitPrice = 15;
             _context.tblColdDrinks.Add(coldDrink);
             await _context.SaveChangesAsync();
 

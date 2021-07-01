@@ -26,7 +26,7 @@ namespace AkijFood.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteLessThan()
         {
-            var itemtoremove = _context.tblColdDrinks.Where(x => x.NumQuantity < 500).First();
+            var itemtoremove = _context.tblColdDrinks.Where(x => x.Quantity < 500).First();
 
             _context.tblColdDrinks.Remove(itemtoremove);
             await _context.SaveChangesAsync();
@@ -37,7 +37,7 @@ namespace AkijFood.Controllers
         //API 06: Find total price of all products
         public ActionResult TotalPrice()
         {
-            var itemtoremove = _context.tblColdDrinks.Sum(x => x.NumUnitPrice);
+            var itemtoremove = _context.tblColdDrinks.Sum(x => x.UnitPrice);
             return Ok(itemtoremove);
         }
     }

@@ -35,7 +35,7 @@ namespace AkijFood.Controllers
                             where item.ColdDrinksName == "Frutika"
                             select item).Single();
 
-            obj.NumUnitPrice = 35;
+            obj.UnitPrice = 35;
             _context.SaveChanges();
             return NoContent();
         }
