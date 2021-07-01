@@ -21,63 +21,12 @@ namespace AkijFood.Controllers
             _context = context;
         }
 
-        // GET: api/tblColdDrinkGivenTask
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<tblColdDrink>>> GettblColdDrinks()
-        {
-            return await _context.tblColdDrinks.ToListAsync();
-        }
-
-        // GET: api/tblColdDrinkGivenTask/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<tblColdDrink>> GettblColdDrink(int id)
-        {
-            var tblColdDrink = await _context.tblColdDrinks.FindAsync(id);
-
-            if (tblColdDrink == null)
-            {
-                return NotFound();
-            }
-
-            return tblColdDrink;
-        }
-
-        // PUT: api/tblColdDrinkGivenTask/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PuttblColdDrink(int id, tblColdDrink tblColdDrink)
-        {
-            if (id != tblColdDrink.ColdDrinksId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tblColdDrink).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tblColdDrinkExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/tblColdDrinkGivenTask
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         // API 01: Insert Mojo (Quantity 575, Unit Price 15)
         [HttpPost]
-        public async Task<ActionResult<tblColdDrink>> MojotblColdDrink(tblColdDrink tblColdDrink)
+        public async Task<ActionResult<tblColdDrink>> PosttblColdDrink(tblColdDrink tblColdDrink)
         {
             tblColdDrink coldDrink = new tblColdDrink();
             coldDrink.ColdDrinksName = "Mojo";
@@ -89,25 +38,28 @@ namespace AkijFood.Controllers
             return CreatedAtAction("GettblColdDrink", new { id = tblColdDrink.ColdDrinksId }, tblColdDrink);
         }
 
-        // DELETE: api/tblColdDrinkGivenTask/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletetblColdDrink(int id)
-        {
-            var tblColdDrink = await _context.tblColdDrinks.FindAsync(id);
-            if (tblColdDrink == null)
-            {
-                return NotFound();
-            }
+        // DELETE: api/tblColdDrink
 
-            _context.tblColdDrinks.Remove(tblColdDrink);
+        //API 03: Delete Speed from the table
+        [HttpDelete]
+        public async Task<IActionResult> DeletetblColdDrink()
+        {
+            var itemtoremove = _context.tblColdDrinks.Where(x=>x.ColdDrinksName == "Speed").First();
+
+            _context.tblColdDrinks.Remove(itemtoremove);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool tblColdDrinkExists(int id)
+        // GET: api/tblColdDrink
+
+        //API 04: Find remaining products name
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<tblColdDrink>>> GettblColdDrinks()
         {
-            return _context.tblColdDrinks.Any(e => e.ColdDrinksId == id);
+            var item = _context.tblColdDrinks.Select(x => new { x.ColdDrinksName }).ToList();
+            return Ok(item);
         }
     }
 }
